@@ -16,14 +16,14 @@ class _HomeScreenState extends State<HomeScreen> {
   final supabase = Supabase.instance.client;
   Key _futureBuilderKey = UniqueKey();
 
-  // Refresh manual
+  //refresh
   Future<void> refresh() async {
     setState(() {
       _futureBuilderKey = UniqueKey();
     });
   }
 
-  // Obtener pines globales
+  //todos los piens
   Future<List<Map<String, dynamic>>> _fetchPins() async {
     final response = await supabase
         .from('pins')
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return List<Map<String, dynamic>>.from(response);
   }
 
-  // Guardar pin en la tabla general de "saves" (favoritos)
+  //saves
   Future<void> _savePin(String pinId) async {
     final user = supabase.auth.currentUser;
     
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // Mostrar el modal de tableros
+  //tablreros
   Future<void> _showBoardOptions(String pinId) async {
     final user = supabase.auth.currentUser;
     if (user == null) {
@@ -138,8 +138,6 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
-
-  // CORRECCIÓN AQUÍ: No pedimos 'pin_count' porque no existe en la tabla
   Future<List<Map<String, dynamic>>> _fetchUserBoards(String userId) async {
     final response = await supabase
         .from('boards')
@@ -180,13 +178,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _createBoardAndAddPin(String boardName, String pinId, String userId) async {
     try {
-      // 1. Insertamos el tablero y pedimos EXPLICITAMENTE solo el ID
+      //crear tablero 
       final response = await supabase.from('boards').insert({
         'user_id': userId,
         'title': boardName,
       }).select('id').single(); 
 
-      // 2. Usamos ese ID para el vínculo
+      //añadir pin al tablero
       await _addPinToBoard(pinId, response['id'].toString());
       
     } catch (e) {
@@ -209,9 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       print('ERROR REAL: $e');
       
-      // Si el error sigue siendo el 42703, es porque tu configuración de Supabase
-      // está forzando un 'return=representation'. 
-      // Si eso pasa, el dato SÍ se guardó, pero la respuesta falló.
+  
       if (e.toString().contains('42703')) {
         _showSnackBar('¡Guardado!', Colors.green);
         refresh();

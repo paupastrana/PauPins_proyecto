@@ -828,19 +828,7 @@ class _SavedScreenState extends State<SavedScreen> {
     }
   }
 
-  // Future<void> _fetchBoards() async {
-  //   try {
-  //     final response = await supabase.from('boards').select().eq('user_id', _currentUserId!).order('created_at', ascending: false);
-  //     if (mounted) {
-  //       setState(() {
-  //         _boards = List<Map<String, dynamic>>.from(response);
-  //         if (_selectedTabIndex == 1) _isLoading = false;
-  //       });
-  //     }
-  //   } catch (e) {
-  //     if (mounted) setState(() => _isLoading = false);
-  //   }
-  // }
+
   Future<void> _fetchBoards() async {
     try {
       // Traemos los boards y, de paso, contamos los registros en la tabla intermedia
