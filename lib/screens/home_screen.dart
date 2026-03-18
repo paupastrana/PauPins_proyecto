@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
         content: TextField(
           controller: boardNameController,
           autofocus: true,
-          decoration: const InputDecoration(hintText: 'Ej: Ideas para mi cuarto'),
+          decoration: const InputDecoration(hintText: 'Ej: motivacion, recetas, viajes...'),
         ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
@@ -199,15 +199,12 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       print("Intentando guardar... Pin: $pinId en Board: $boardId");
 
-      // EL CAMBIO CLAVE:
-      // Agregamos un select vacío o simplemente no ponemos nada 
-      // para que PostgREST no intente devolver la fila completa.
       await supabase.from('board_pins').insert({
         'pin_id': pinId,
         'board_id': boardId,
-      }); // <--- SIN .select() al final
+      }); 
 
-      _showSnackBar('¡Ahora sí se guardó real!', Colors.green);
+      _showSnackBar('Pin añadido al tablero', Colors.green);
       refresh();
     } catch (e) {
       print('ERROR REAL: $e');

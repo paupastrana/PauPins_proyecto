@@ -81,7 +81,6 @@ class _CreatePinScreenState extends State<CreatePinScreen> {
         'description': _descriptionController.text,
         'image_url': publicUrl,
         'source_url': _urlController.text,
-        // Si no tienes auth configurado todavía, comenta la siguiente línea:
         'user_id': supabase.auth.currentUser?.id, 
       });
 
@@ -91,7 +90,7 @@ class _CreatePinScreenState extends State<CreatePinScreen> {
 
         //mensaje
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('¡Pin publicado con éxito!')),
+          const SnackBar(content: Text('Pin publicado')),
         );
 
         //reseta
@@ -225,7 +224,7 @@ class _CreatePinScreenState extends State<CreatePinScreen> {
 
             const SizedBox(height: 40),
 
-            //boton
+            //
             SizedBox(
               width: double.infinity,
               height: 55,
