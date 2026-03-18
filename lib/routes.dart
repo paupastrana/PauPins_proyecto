@@ -4,8 +4,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'screens/search_screen.dart';
-import 'screens/profile_screen.dart';
-import 'screens/pin_detail_screen.dart';
 import 'screens/create_pin_screen.dart';
 
 class AppRoutes {

@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 80),
-            // Logo/Title
+            //titulo
             Container(
               padding: const EdgeInsets.only(bottom: 40),
               child: const Text(
@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            // Login Form
+            //form
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  // Email Field
+                  //email
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 16),
-                  // Password Field
+                  //contra
                   TextField(
                     controller: _passwordController,
                     decoration: InputDecoration(
@@ -99,18 +99,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     obscureText: _obscurePassword,
                   ),
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        // TODO: Forgot password
-                      },
-                      child: const Text('¿Olvidaste tu contraseña?'),
-                    ),
-                  ),
+                  
                   const SizedBox(height: 24),
-                  // Login Button
+                  //btn
                   SizedBox(
                     width: double.infinity,
                     height: 48,
@@ -144,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  // Divider
+                  
                   
                   const SizedBox(height: 24),
                   // Sign Up Link
@@ -184,7 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
     final email = _emailController.text.trim();
     final password = _passwordController.text;
 
-    // 1. Validaciones básicas
     if (email.isEmpty || password.isEmpty) {
       _showError('Por favor completa todos los campos');
       return;
@@ -195,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     try {
-      // 2. Intento de inicio de sesión con Supabase
+      // inicio 
       final AuthResponse res = await Supabase.instance.client.auth.signInWithPassword(
         email: email,
         password: password,
@@ -208,10 +198,10 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       }
     } on AuthException catch (error) {
-      // Errores específicos de Supabase (credenciales inválidas, etc.)
+  
       _showError(error.message);
     } catch (error) {
-      // Errores genéricos
+
       _showError('Ocurrió un error inesperado');
     } finally {
       if (mounted) {
@@ -222,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // Método auxiliar para mostrar errores
+  
   void _showError(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

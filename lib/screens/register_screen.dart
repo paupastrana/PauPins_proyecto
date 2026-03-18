@@ -37,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 60),
-            // Logo/Title
+            //titulo
             Container(
               padding: const EdgeInsets.only(bottom: 30),
               child: const Text(
@@ -49,7 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
-            // Register Form
+            //form
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
